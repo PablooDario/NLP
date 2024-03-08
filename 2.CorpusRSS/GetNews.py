@@ -37,8 +37,11 @@ def normalize_data(entry: str) -> str:
                 if token.pos in stop_words:
                     continue
                 content += ' ' + token.lemma
-        content = content[0].upper() + content[1:]
-        return content.lstrip()
+        # If the content is string type and the it is not null, capitalize the first word
+        if isinstance(content, str) and len(content) > 0:
+            content = content.lstrip()
+            content = content[0].upper() + content[1:]
+        return content
             
 
 def write_raw_data_corpus(source, section, feed):
@@ -62,14 +65,15 @@ def write_normalized_data(source, section, feed):
         writer = DictWriter(csv_file, field_names)
         # Check every new
         for entry in feed.entries:
-            if entry.title in normalized_df['Title'].values:
+            #Normalize title
+            title = normalize_data(entry.title)
+            if title in normalized_df['Title'].values:
                 continue
             # Give format to the date
             published_date = entry.published_parsed
             date = f"{published_date.tm_mday}/{published_date.tm_mon}/{published_date.tm_year}"
-            # Normalize the content and title
+            # Normalize the title
             content = normalize_data(entry.description)
-            title = normalize_data(entry.title)
             
             writer.writerow({"Source": source, "Title": title, "Content": content, "Section": section, "URL": entry.link, 'Date': date})
         
