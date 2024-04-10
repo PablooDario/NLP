@@ -99,7 +99,7 @@ class controller:
             
         compared_documents = dict(sorted(compared_documents.items(), key=lambda x:x[1], reverse=True)[:10])
         
-        for similarity, idx, similarity in compared_documents.items():
+        for idx, similarity in compared_documents.items():
             print(f"Document: {idx}, similarity: {similarity:.2f}%")
             
             
