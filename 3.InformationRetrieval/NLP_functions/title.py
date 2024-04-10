@@ -5,7 +5,7 @@ import os
 import pickle
 
 # Read the normalized corpus
-df = pd.read_csv("NLP_functions/Corpus.csv")
+df = pd.read_csv("3.InformationRetrieval/NLP_functions/Corpus.csv")
 element = df['Título']
 
 #Create regex for count_vectorized
@@ -22,23 +22,22 @@ class binary_title:
     
     
     def unigram_matrix(self):
-        'NLP_functions/pickles_files'
-        if (os.path.exists('NLP_functions/pickles_files/title_binary_unigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_binary_unigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_unigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_unigram_matrix.pkl','rb') as pkl_file:
                 unigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_binary_unigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_unigram_matrix.pkl','wb') as pkl_file:
                 unigramMatrix = self.unigramVocabulary.transform(element)
                 pickle.dump(unigramMatrix, pkl_file)                
         return unigramMatrix.toarray()
         
         
     def bigram_matrix(self):
-        if (os.path.exists('NLP_functions/pickles_files/title_binary_bigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_binary_bigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_bigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_bigram_matrix.pkl','rb') as pkl_file:
                 bigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_binary_bigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_binary_bigram_matrix.pkl','wb') as pkl_file:
                 bigramMatrix = self.bigramVocabulary.transform(element)
                 pickle.dump(bigramMatrix, pkl_file)        
         return bigramMatrix.toarray()
@@ -53,22 +52,22 @@ class frequency_title:
     
     
     def unigram_matrix(self):
-        if (os.path.exists('NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl','rb') as pkl_file:
                 unigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_unigram_matrix.pkl','wb') as pkl_file:
                 unigramMatrix = self.unigramVocabulary.transform(element)
                 pickle.dump(unigramMatrix, pkl_file)
         return unigramMatrix.toarray()
         
         
     def bigram_matrix(self):
-        if (os.path.exists('NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl','rb') as pkl_file:
                 bigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_frequency_bigram_matrix.pkl','wb') as pkl_file:
                 bigramMatrix = self.bigramVocabulary.transform(element)
                 pickle.dump(bigramMatrix, pkl_file)    
         return bigramMatrix.toarray()
@@ -82,22 +81,22 @@ class tfidf_title:
         self.bigramVocabulary = TfidfVectorizer(token_pattern=regex, ngram_range=(2,2)).fit(element)
         
     def unigram_matrix(self):
-        if (os.path.exists('NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl','rb') as pkl_file:
                 unigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_unigram_matrix.pkl','wb') as pkl_file:
                 unigramMatrix = self.unigramVocabulary.transform(element)
                 pickle.dump(unigramMatrix, pkl_file)
         return unigramMatrix.toarray()
         
         
     def bigram_matrix(self):
-        if (os.path.exists('NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl')):
-            with open ('NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl','rb') as pkl_file:
+        if (os.path.exists('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl')):
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl','rb') as pkl_file:
                 bigramMatrix = pickle.load(pkl_file)
         else:
-            with open ('NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl','wb') as pkl_file:
+            with open ('3.InformationRetrieval/NLP_functions/pickles_files/title_tfidf_bigram_matrix.pkl','wb') as pkl_file:
                 bigramMatrix = self.bigramVocabulary.transform(element)
                 pickle.dump(bigramMatrix, pkl_file)    
         return bigramMatrix.toarray()
